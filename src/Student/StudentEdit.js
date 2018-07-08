@@ -10,7 +10,7 @@ export default class StudentEdit extends Component {
 
     this.state = {
       showbutton: true,
-      lecturers: {}
+      students: {}
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -85,7 +85,7 @@ export default class StudentEdit extends Component {
         </ul>
 
         <div className="container">
-          <form className="needs-validation" novalidate key={students.Id}>
+          <form key={students.Id} className="needs-validation" novalidate>
             <div className="row">
               <div className="col-md-3 mb-3">
                 <label for="firstName">Name</label>

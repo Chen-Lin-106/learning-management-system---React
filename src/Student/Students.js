@@ -68,11 +68,9 @@ export default class Students extends Component {
             </thead>
             <tbody>
               {students.map(student => (
-                <tr>
+                <tr key={student.Id}>
                   <td>{student.Id}</td>
-                  <Link to={`/students/${student.Id}`}>
-                    <td>{student.Name}</td>
-                  </Link>
+                  <td><Link to={`/students/${student.Id}`}>{student.Name}</Link></td>
                 </tr>
               ))}
             </tbody>
