@@ -85,10 +85,10 @@ export default class StudentEdit extends Component {
         </ul>
 
         <div className="container">
-          <form key={students.Id} className="needs-validation" novalidate>
+          <form key={students.Id} className="needs-validation">
             <div className="row">
               <div className="col-md-3 mb-3">
-                <label for="firstName">Name</label>
+                <label>Name</label>
                 <input
                   className="form-control"
                   value={students.Name}

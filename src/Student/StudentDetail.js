@@ -53,9 +53,9 @@ export default class StudentDetail extends Component {
                 />
                 <div key={students.Id} className="card-body">
                   <h5 className="card-title">{students.Name}</h5>
-                  <h7 className="card-title">
+                  <h6 className="card-title">
                     ID ---> {students.StudentDetail}
-                  </h7>
+                  </h6>
                   <p className="card-text">
                     Detail ---> {students.StudentDetail}
                   </p>

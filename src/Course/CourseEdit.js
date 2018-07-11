@@ -82,10 +82,10 @@ export default class CourseEdit extends Component {
         </ul>
 
         <div className="container">
-          <form className="needs-validation" novalidate key={courses.Id}>
+          <form className="needs-validation" key={courses.Id}>
             <div className="row">
               <div className="col-md-3 mb-3">
-                <label for="firstName">Name</label>
+                <label>Name</label>
                 <input
                   className="form-control"
                   value={courses.Name}
@@ -95,7 +95,7 @@ export default class CourseEdit extends Component {
               </div>
 
               <div className="col-md-3 mb-3">
-                <label for="lastName">Code</label>
+                <label>Code</label>
                 <input
                   className="form-control"
                   value={courses.CourseCode}
@@ -105,7 +105,7 @@ export default class CourseEdit extends Component {
               </div>
 
               <div className="col-md-12 mb-3">
-                <label for="address">Introduction</label>
+                <label>Introduction</label>
                 <textarea
                   className="form-control"
                   value={courses.Introduction}

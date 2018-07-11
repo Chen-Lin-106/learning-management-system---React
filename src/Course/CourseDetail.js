@@ -53,7 +53,7 @@ export default class CourseDetail extends Component {
                 />
                 <div key={courses.Id} className="card-body">
                   <h5 className="card-title">{courses.Name}</h5>
-                  <h7 className="card-title">Code ---> {courses.CourseCode}</h7>
+                  <h6 className="card-title">Code ---> {courses.CourseCode}</h6>
                   <p className="card-text">
                     Introuction ---> {courses.Introduction}
                   </p>

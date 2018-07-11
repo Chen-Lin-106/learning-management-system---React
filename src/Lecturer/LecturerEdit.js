@@ -85,10 +85,10 @@ export default class CourseEdit extends Component {
         </ul>
 
         <div className="container">
-          <form className="needs-validation" novalidate key={lecturers.Id}>
+          <form className="needs-validation" key={lecturers.Id}>
             <div className="row">
               <div className="col-md-3 mb-3">
-                <label for="firstName">Name</label>
+                <label>Name</label>
                 <input
                   className="form-control"
                   value={lecturers.Name}

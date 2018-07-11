@@ -9,8 +9,7 @@ export default class Lecturers extends Component {
     this.state = {
       isLoading: false,
       lecturers: [],
-      details: [],
-  
+      details: []
     };
   }
 
@@ -19,8 +18,7 @@ export default class Lecturers extends Component {
       .get(`http://lmsdemomar.azurewebsites.net/api/lecturer`)
       .then(response => {
         const lecturers = response.data;
-        const details = lecturers.map(d => d.LecturerDetail);
-
+        const details = lecturers.map(a => a.LecturerDetail);
         console.log(details);
         this.setState({ lecturers });
       })
@@ -31,7 +29,6 @@ export default class Lecturers extends Component {
 
   render() {
     const { lecturers } = this.state;
-    const { details} = this.state;
     return (
       <div className="main">
         <LecturerHeader />
@@ -53,9 +50,6 @@ export default class Lecturers extends Component {
                     </Link>
                   </h3>
                   <strong className="d-inline-block mb-2 text-primary" />
-                  { details.map((d) => (
-                    <p>{d.detail}</p>
-                  ))}
                 </div>
                 <img
                   className="card-img-right flex-auto d-none d-md-block coursecard-img"
@@ -66,6 +60,7 @@ export default class Lecturers extends Component {
             </div>
           ))}
         </div>
+
 
         <div className="table-responsive">
           <table className="table table-striped table-sm">
@@ -80,7 +75,6 @@ export default class Lecturers extends Component {
                 <tr key={lecturer.Id}>
                   <td>{lecturer.Id}</td>
                   <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Name}</Link></td>
-
                 </tr>
               ))}
             </tbody>
