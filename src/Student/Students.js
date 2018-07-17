@@ -58,6 +58,9 @@ export default class Students extends Component {
                   <strong className="d-inline-block mb-2 text-primary">
                      Enrolled Course: {(student.Enrollments.map(a => a.Course)).map(b => b.Name)}
                   </strong>
+                  <strong className="d-inline-block mb-2 text-primary">
+                     Course ID: {(student.Enrollments.map(a => a.Course)).map(b => b.Id)}
+                  </strong>
                 </div>
                 <img
                   className="card-img-right flex-auto d-none d-md-block coursecard-img"
@@ -76,6 +79,7 @@ export default class Students extends Component {
                 <th>ID</th>
                 <th>Name</th>
                 <th>Enrolled Course</th>
+                <th>Enrolled Course ID</th>
               </tr>
             </thead>
             <tbody>
@@ -84,6 +88,7 @@ export default class Students extends Component {
                   <td><Link to={`/students/${student.Id}`}>{student.Id}</Link></td>
                   <td><Link to={`/students/${student.Id}`}>{student.Name}</Link></td>
                   <td>{(student.Enrollments.map(a => a.Course)).map(b => b.Name)}</td>
+                  <td>{(student.Enrollments.map(a => a.Course)).map(b => b.Id)}</td>
                 </tr>
               ))}
             </tbody>

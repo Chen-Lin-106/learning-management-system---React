@@ -59,6 +59,9 @@ export default class Lecturers extends Component {
                   <strong className="d-inline-block mb-2 text-primary">
                       Teaching Course: {(lecturer.Teaching.map(a => a.course)).map(b => b.Name)}
                   </strong>
+                  <strong className="d-inline-block mb-2 text-primary">
+                      Course ID: {(lecturer.Teaching.map(a => a.course)).map(b => b.Id)}
+                  </strong>
 
                 </div>
                 <img
@@ -79,6 +82,7 @@ export default class Lecturers extends Component {
                 <th>ID</th>
                 <th>Name</th>
                 <th>Teaching Course</th>
+                <th>Teaching Course ID</th>
               </tr>
             </thead>
             <tbody>
@@ -87,6 +91,7 @@ export default class Lecturers extends Component {
                   <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Id}</Link></td>
                   <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Name}</Link></td>
                   <td>{(lecturer.Teaching.map(a => a.course)).map(b => b.Name)}</td>
+                  <td>{(lecturer.Teaching.map(a => a.course)).map(b => b.Id)}</td>
                 </tr>
               ))}
             </tbody>
