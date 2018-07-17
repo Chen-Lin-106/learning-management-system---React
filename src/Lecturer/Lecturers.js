@@ -9,7 +9,6 @@ export default class Lecturers extends Component {
     this.state = {
       isLoading: false,
       lecturers: [],
-      details: []
     };
   }
 
@@ -18,8 +17,6 @@ export default class Lecturers extends Component {
       .get(`http://lmsdemomar.azurewebsites.net/api/lecturer`)
       .then(response => {
         const lecturers = response.data;
-        const details = lecturers.map(a => a.LecturerDetail);
-        console.log(details);
         this.setState({ lecturers });
       })
       .catch(e => {
@@ -29,6 +26,7 @@ export default class Lecturers extends Component {
 
   render() {
     const { lecturers } = this.state;
+    console.log(lecturers);
     return (
       <div className="main">
         <LecturerHeader />
@@ -49,7 +47,19 @@ export default class Lecturers extends Component {
                       {lecturer.Name}
                     </Link>
                   </h3>
-                  <strong className="d-inline-block mb-2 text-primary" />
+                  <div className="mb-1 text-muted">
+                    <Link
+                      className="text-dark"
+                      to={`/lecturers/${lecturer.Id}`}
+                    >
+                    LECTURER ID -- {lecturer.Id}
+                  </Link>
+                  </div>
+                  <p className="card-text mb-auto"></p>
+                  <strong className="d-inline-block mb-2 text-primary">
+                      Teaching Course: {(lecturer.Teaching.map(a => a.course)).map(b => b.Name)}
+                  </strong>
+
                 </div>
                 <img
                   className="card-img-right flex-auto d-none d-md-block coursecard-img"
@@ -68,13 +78,15 @@ export default class Lecturers extends Component {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Teaching Course</th>
               </tr>
             </thead>
             <tbody>
               {lecturers.map(lecturer => (
                 <tr key={lecturer.Id}>
-                  <td>{lecturer.Id}</td>
+                  <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Id}</Link></td>
                   <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Name}</Link></td>
+                  <td>{(lecturer.Teaching.map(a => a.course)).map(b => b.Name)}</td>
                 </tr>
               ))}
             </tbody>

@@ -45,7 +45,7 @@ export default class CourseDetail extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <div className="card mb-4 box-shadow">
+              <div className="card mb-4 box-shadow detail-card">
                 <img
                   className="card-img-top"
                   src="https://i.pinimg.com/originals/a2/21/8c/a2218ca943271618502c1c7b58f45ff7.jpg"
@@ -53,6 +53,7 @@ export default class CourseDetail extends Component {
                 />
                 <div key={courses.Id} className="card-body">
                   <h5 className="card-title">{courses.Name}</h5>
+                  <h6 className="card-title">ID ---> #{courses.Id}</h6>
                   <h6 className="card-title">Code ---> {courses.CourseCode}</h6>
                   <p className="card-text">
                     Introuction ---> {courses.Introduction}

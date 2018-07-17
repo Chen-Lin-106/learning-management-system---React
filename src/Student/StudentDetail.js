@@ -10,9 +10,13 @@ export default class StudentDetail extends Component {
 
     this.state = {
       showbutton: true,
-      students: {}
+      students: {},
+      enrolment: {}
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.deletePick = this.deletePick.bind(this);
   }
 
   componentWillMount() {
@@ -36,8 +40,39 @@ export default class StudentDetail extends Component {
     this.setState({ showbutton: false });
   };
 
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    const enrolment = { ...this.state.enrolment };
+    enrolment[name] = value;
+    this.setState({ enrolment });
+    console.log(enrolment);
+  };
+
+  handlePick(e) {
+    e.preventDefault();
+    const { enrolment } = this.state;
+    axios
+      .post(`http://lmsdemomar.azurewebsites.net/api/enrolment`, enrolment)
+      .then(response => {
+        console.log(response);
+      });
+    swal("Great!", "Course has been choose sucessfully", "success");
+  }
+
+  deletePick(e) {
+    e.preventDefault();
+    const { enrolment } = this.state;
+    axios
+      .delete(`http://lmsdemomar.azurewebsites.net/api/enrolment`, {data:enrolment})
+      .then(response => {
+        console.log(response);
+      });
+    swal("Deleted", "Item has been deleted", "success");
+  }
+
   render() {
     const { students } = this.state;
+    const { enrolment } = this.state;
     return (
       <div className="main">
         <StudentHeader />
@@ -53,12 +88,7 @@ export default class StudentDetail extends Component {
                 />
                 <div key={students.Id} className="card-body">
                   <h5 className="card-title">{students.Name}</h5>
-                  <h6 className="card-title">
-                    ID ---> {students.StudentDetail}
-                  </h6>
-                  <p className="card-text">
-                    Detail ---> {students.StudentDetail}
-                  </p>
+                  <h6 className="card-title">ID ---> {students.Id}</h6>
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="btn-group">
                       <Link to={`/students/edit/${students.Id}`}>
@@ -92,6 +122,36 @@ export default class StudentDetail extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="col-md-3">
+              <input
+                className="form-control"
+                value={enrolment.StudentID}
+                name="StudentID"
+                placeholder="Student ID"
+                onChange={this.handleInputChange}
+              />
+              <input
+                className="form-control"
+                value={enrolment.CourseID}
+                name="CourseID"
+                placeholder="Course ID"
+                onChange={this.handleInputChange}
+              />
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={this.handlePick}
+              >
+                Choose Course
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={this.deletePick}
+              >
+                Delete Course
+              </button>
             </div>
           </div>
         </div>

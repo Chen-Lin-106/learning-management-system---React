@@ -106,7 +106,7 @@ export default class CourseEdit extends Component {
 
               <div className="col-md-12 mb-3">
                 <label>Introduction</label>
-                <textarea
+                <input
                   className="form-control"
                   value={courses.Introduction}
                   name="Introduction"

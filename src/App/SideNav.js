@@ -27,16 +27,6 @@ export default class SideNav extends Component {
                 Lecturer
               </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="">
-                <span>Enrolnment</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="">
-                <span>Teaching</span>
-              </a>
-            </li>
           </ul>
         </div>
       </nav>

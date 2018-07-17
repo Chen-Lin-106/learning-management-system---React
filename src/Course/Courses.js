@@ -43,13 +43,9 @@ export default class Courses extends Component {
                       {course.Name}
                     </Link>
                   </h3>
-                  <div className="mb-1 text-muted coursecode">
-                    {course.CourseCode}
+                  <div className="mb-1 text-muted">
+                    COURSE ID -- #{course.Id}
                   </div>
-                  <p className="card-text mb-auto">{course.Introduction}</p>
-                  <strong className="d-inline-block mb-2 text-primary">
-                    Lecturer - Ding
-                  </strong>
                 </div>
                 <img
                   className="card-img-right flex-auto d-none d-md-block coursecard-img"

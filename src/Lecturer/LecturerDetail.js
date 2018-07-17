@@ -10,9 +10,13 @@ export default class LecturerDetail extends Component {
 
     this.state = {
       showbutton: true,
-      lecturers: {}
+      lecturers: {},
+      teaching: {}
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.deletePick = this.deletePick.bind(this);
   }
 
   componentWillMount() {
@@ -36,8 +40,39 @@ export default class LecturerDetail extends Component {
     this.setState({ showbutton: false });
   };
 
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    const teaching = { ...this.state.teaching };
+    teaching[name] = value;
+    this.setState({ teaching });
+    console.log(teaching);
+  };
+
+  deletePick(e) {
+    e.preventDefault();
+    const { id } = this.props.match.params;
+    axios
+      .delete(`http://lmsdemomar.azurewebsites.net/api/teaching/${id}`)
+      .then(response => {
+        console.log(response);
+      });
+    swal("Delete", "Course has been droped", "success");
+  }
+
+    handlePick(e) {
+      e.preventDefault();
+      const { teaching } = this.state;
+      axios
+        .post(`http://lmsdemomar.azurewebsites.net/api/teaching`, teaching)
+        .then(response => {
+          console.log(response);
+        });
+        swal("Great!", "Course has been choose sucessfully", "success");
+      }
+
   render() {
     const { lecturers } = this.state;
+    const { teaching } = this.state;
     return (
       <div className="main">
         <LecturerHeader />
@@ -54,11 +89,10 @@ export default class LecturerDetail extends Component {
                 <div key={lecturers.Id} className="card-body">
                   <h5 className="card-title">{lecturers.Name}</h5>
                   <h6 className="card-title">
-                    ID ---> {lecturers.LecturerDetail}
+                    ID ---> #{lecturers.Id}
                   </h6>
-                  <p className="card-text">
-                    Detail ---> {lecturers.LecturerDetail}
-                  </p>
+
+
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="btn-group">
                       <Link to={`/lecturers/edit/${lecturers.Id}`}>
@@ -92,6 +126,36 @@ export default class LecturerDetail extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="col-md-3">
+              <input
+                className="form-control"
+                value={teaching.lecturerId}
+                name="lecturerId"
+                placeholder="Course ID"
+                onChange={this.handleInputChange}
+              />
+              <input
+                  className="form-control"
+                  value={teaching.courseId}
+                  name="courseId"
+                  placeholder="Lecturer ID"
+                  onChange={this.handleInputChange}
+                />
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={this.handlePick}
+              >
+                Choose Course
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={this.deletePick}
+              >
+                Delete Course
+              </button>
             </div>
           </div>
         </div>
