@@ -35,9 +35,6 @@ export default class Courses extends Component {
             <div key={course.Id} className="col-md-6">
               <div className="card flex-md-row mb-4 box-shadow h-md-250">
                 <div className="card-body d-flex flex-column align-items-start">
-                  <strong className="d-inline-block mb-2 text-primary">
-                    Course Card
-                  </strong>
                   <h3 className="mb-0">
                     <Link className="text-dark" to={`/courses/${course.Id}`}>
                       {course.Name}
