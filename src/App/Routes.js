@@ -13,9 +13,11 @@ import Students from "../Student/Students";
 import StudentDetail from "../Student/StudentDetail";
 import StudentEdit from "../Student/StudentEdit";
 import StudentNew from "../Student/StudentNew";
+import Login from "../Login/Login";
 
 export default () => (
   <div className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-2">
+    <Route exact path="/login" component={Login} />
     <Route exact path="/" component={Home} />
     <Route exact path="/courses" component={Courses} />
     <Route exact path="/courses/:id" component={CourseDetail} />

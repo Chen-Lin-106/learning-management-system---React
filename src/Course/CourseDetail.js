@@ -9,7 +9,6 @@ export default class CourseDetail extends Component {
     super(props);
 
     this.state = {
-      showbutton: true,
       courses: {}
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -27,13 +26,13 @@ export default class CourseDetail extends Component {
 
   handleDelete = event => {
     const { id } = this.props.match.params;
+    const { match: { params }, history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/course/${id}`)
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/courses');
       });
     swal("Deleted", "Item has been deleted", "success");
-    this.setState({ showbutton: false });
   };
 
   render() {
@@ -69,7 +68,7 @@ export default class CourseDetail extends Component {
                         </button>
                       </Link>
                       <Link to={`/courses/${courses.Id}`}>
-                        {this.state.showbutton ? (
+
                           <button
                             type="button"
                             className="btn btn-sm btn-outline-secondary"
@@ -77,7 +76,6 @@ export default class CourseDetail extends Component {
                           >
                             Delete
                           </button>
-                        ) : null}
                       </Link>
                       <Link to="/courses">
                         <button

@@ -9,7 +9,6 @@ export default class StudentDetail extends Component {
     super(props);
 
     this.state = {
-      showbutton: true,
       students: {},
       enrolment: {}
     };
@@ -31,13 +30,13 @@ export default class StudentDetail extends Component {
 
   handleDelete = event => {
     const { id } = this.props.match.params;
+    const { match: { params }, history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/student/${id}`)
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/students');
       });
     swal("Deleted", "Item has been deleted", "success");
-    this.setState({ showbutton: false });
   };
 
   handleInputChange = e => {
@@ -51,10 +50,11 @@ export default class StudentDetail extends Component {
   handlePick(e) {
     e.preventDefault();
     const { enrolment } = this.state;
+    const { match: { params }, history } = this.props;
     axios
       .post(`http://lmsdemomar.azurewebsites.net/api/enrolment`, enrolment)
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/students');
       });
     swal("Great!", "Course has been choose sucessfully", "success");
   }
@@ -62,10 +62,11 @@ export default class StudentDetail extends Component {
   deletePick(e) {
     e.preventDefault();
     const { enrolment } = this.state;
+    const { match: { params }, history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/enrolment`, {data:enrolment})
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/students');
       });
     swal("Deleted", "Item has been deleted", "success");
   }
@@ -100,7 +101,7 @@ export default class StudentDetail extends Component {
                         </button>
                       </Link>
                       <Link to={`/students/${students.Id}`}>
-                        {this.state.showbutton ? (
+
                           <button
                             type="button"
                             className="btn btn-sm btn-outline-secondary"
@@ -108,7 +109,7 @@ export default class StudentDetail extends Component {
                           >
                             Delete
                           </button>
-                        ) : null}
+
                       </Link>
                       <Link to="/students">
                         <button
@@ -123,12 +124,12 @@ export default class StudentDetail extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <input
                 className="form-control"
                 value={enrolment.StudentID}
                 name="StudentID"
-                placeholder="Student ID"
+                placeholder={students.Id}
                 onChange={this.handleInputChange}
               />
               <input
@@ -152,6 +153,7 @@ export default class StudentDetail extends Component {
               >
                 Delete Course
               </button>
+
             </div>
           </div>
         </div>

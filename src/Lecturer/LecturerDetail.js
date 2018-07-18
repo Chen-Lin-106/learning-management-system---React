@@ -9,7 +9,6 @@ export default class LecturerDetail extends Component {
     super(props);
 
     this.state = {
-      showbutton: true,
       lecturers: {},
       teaching: {}
     };
@@ -31,13 +30,13 @@ export default class LecturerDetail extends Component {
 
   handleDelete = event => {
     const { id } = this.props.match.params;
+    const { match: { params }, history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/lecturer/${id}`)
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/lecturers');
       });
     swal("Deleted", "Item has been deleted", "success");
-    this.setState({ showbutton: false });
   };
 
   handleInputChange = e => {
@@ -51,10 +50,11 @@ export default class LecturerDetail extends Component {
   deletePick(e) {
     e.preventDefault();
     const { id } = this.props.match.params;
+    const { match: { params }, history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/teaching/${id}`)
-      .then(response => {
-        console.log(response);
+      .then(() => {
+      history.push('/lecturers');
       });
     swal("Delete", "Course has been droped", "success");
   }
@@ -62,10 +62,11 @@ export default class LecturerDetail extends Component {
     handlePick(e) {
       e.preventDefault();
       const { teaching } = this.state;
+      const { match: { params }, history } = this.props;
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/teaching`, teaching)
-        .then(response => {
-          console.log(response);
+        .then(() => {
+        history.push('/lecturers');
         });
         swal("Great!", "Course has been choose sucessfully", "success");
       }
@@ -104,7 +105,7 @@ export default class LecturerDetail extends Component {
                         </button>
                       </Link>
                       <Link to={`/lecturers/${lecturers.Id}`}>
-                        {this.state.showbutton ? (
+
                           <button
                             type="button"
                             className="btn btn-sm btn-outline-secondary"
@@ -112,7 +113,7 @@ export default class LecturerDetail extends Component {
                           >
                             Delete
                           </button>
-                        ) : null}
+
                       </Link>
                       <Link to="/lecturers">
                         <button

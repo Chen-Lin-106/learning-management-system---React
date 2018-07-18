@@ -9,7 +9,6 @@ export default class CourseEdit extends Component {
     super(props);
 
     this.state = {
-      showbutton: true,
       courses: {}
     };
 
@@ -44,22 +43,21 @@ export default class CourseEdit extends Component {
     e.preventDefault();
     const { courses } = this.state;
     const { id } = this.props.match.params;
+    const { match: { params }, history } = this.props;
     if ("NEW" === id) {
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/course`, courses)
-        .then(response => {
-          console.log(response);
+        .then(() => {
+        history.push('/courses');
         });
       swal("Great!", "New Course has been added sucessfully", "success");
-      this.setState({ showbutton: false });
     } else {
       axios
         .put(`http://lmsdemomar.azurewebsites.net/api/course/${id}`, courses)
-        .then(response => {
-          console.log(response);
+        .then(() => {
+        history.push('/courses');
         });
       swal("Great!", "It has been edited sucessfully!", "success");
-      this.setState({ showbutton: false });
     }
   }
 
@@ -115,7 +113,7 @@ export default class CourseEdit extends Component {
               </div>
 
               <div className="btn-group">
-                {this.state.showbutton ? (
+                
                   <button
                     type="button"
                     className="btn btn-sm btn-outline-secondary"
@@ -123,7 +121,7 @@ export default class CourseEdit extends Component {
                   >
                     Save
                   </button>
-                ) : null}
+
 
                 <Link to="/courses">
                   <button
