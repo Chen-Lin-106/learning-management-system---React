@@ -9,7 +9,6 @@ export default class StudentEdit extends Component {
     super(props);
 
     this.state = {
-      showbutton: true,
       students: {}
     };
 
@@ -44,25 +43,24 @@ export default class StudentEdit extends Component {
     e.preventDefault();
     const { students } = this.state;
     const { id } = this.props.match.params;
+    const {
+      match: { params },
+      history
+    } = this.props;
     if ("NEW" === id) {
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/student`, students)
-        .then(response => {
-          console.log(response);
+        .then(() => {
+          history.push("/students");
         });
       swal("Great!", "New Course has been added sucessfully", "success");
-      this.setState({ showbutton: false });
     } else {
       axios
-        .put(
-          `http://lmsdemomar.azurewebsites.net/api/student/${id}`,
-          students
-        )
-        .then(response => {
-          console.log(response);
+        .put(`http://lmsdemomar.azurewebsites.net/api/student/${id}`, students)
+        .then(() => {
+          history.push("/students");
         });
       swal("Great!", "It has been edited sucessfully!", "success");
-      this.setState({ showbutton: false });
     }
   }
 
@@ -79,8 +77,7 @@ export default class StudentEdit extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="">
-            </a>
+            <a className="nav-link disabled" href="" />
           </li>
         </ul>
 
@@ -98,15 +95,13 @@ export default class StudentEdit extends Component {
               </div>
 
               <div className="btn-group">
-                {this.state.showbutton ? (
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary"
-                    onClick={this.handleSubmit}
-                  >
-                    Save
-                  </button>
-                ) : null}
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={this.handleSubmit}
+                >
+                  Save
+                </button>
 
                 <Link to="/students">
                   <button

@@ -26,11 +26,14 @@ export default class CourseDetail extends Component {
 
   handleDelete = event => {
     const { id } = this.props.match.params;
-    const { match: { params }, history } = this.props;
+    const {
+      match: { params },
+      history
+    } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/course/${id}`)
       .then(() => {
-      history.push('/courses');
+        history.push("/courses");
       });
     swal("Deleted", "Item has been deleted", "success");
   };
@@ -68,14 +71,13 @@ export default class CourseDetail extends Component {
                         </button>
                       </Link>
                       <Link to={`/courses/${courses.Id}`}>
-
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary"
-                            onClick={this.handleDelete}
-                          >
-                            Delete
-                          </button>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary"
+                          onClick={this.handleDelete}
+                        >
+                          Delete
+                        </button>
                       </Link>
                       <Link to="/courses">
                         <button

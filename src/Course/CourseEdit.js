@@ -43,19 +43,22 @@ export default class CourseEdit extends Component {
     e.preventDefault();
     const { courses } = this.state;
     const { id } = this.props.match.params;
-    const { match: { params }, history } = this.props;
+    const {
+      match: { params },
+      history
+    } = this.props;
     if ("NEW" === id) {
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/course`, courses)
         .then(() => {
-        history.push('/courses');
+          history.push("/courses");
         });
       swal("Great!", "New Course has been added sucessfully", "success");
     } else {
       axios
         .put(`http://lmsdemomar.azurewebsites.net/api/course/${id}`, courses)
         .then(() => {
-        history.push('/courses');
+          history.push("/courses");
         });
       swal("Great!", "It has been edited sucessfully!", "success");
     }
@@ -74,8 +77,7 @@ export default class CourseEdit extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="">
-            </a>
+            <a className="nav-link disabled" href="" />
           </li>
         </ul>
 
@@ -113,15 +115,13 @@ export default class CourseEdit extends Component {
               </div>
 
               <div className="btn-group">
-                
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary"
-                    onClick={this.handleSubmit}
-                  >
-                    Save
-                  </button>
-
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={this.handleSubmit}
+                >
+                  Save
+                </button>
 
                 <Link to="/courses">
                   <button
