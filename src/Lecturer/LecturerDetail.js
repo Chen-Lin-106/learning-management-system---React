@@ -50,9 +50,10 @@ export default class LecturerDetail extends Component {
   deletePick(e) {
     e.preventDefault();
     const { id } = this.props.match.params;
+    const { teaching } = this.state;
     const { match: { params }, history } = this.props;
     axios
-      .delete(`http://lmsdemomar.azurewebsites.net/api/teaching/${id}`)
+      .delete(`http://lmsdemomar.azurewebsites.net/api/teaching`,{data:teaching})
       .then(() => {
       history.push('/lecturers');
       });

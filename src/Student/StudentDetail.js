@@ -131,6 +131,7 @@ export default class StudentDetail extends Component {
                 name="StudentID"
                 placeholder={students.Id}
                 onChange={this.handleInputChange}
+                required
               />
               <input
                 className="form-control"
