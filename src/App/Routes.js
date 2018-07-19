@@ -14,7 +14,6 @@ import StudentDetail from "../Student/StudentDetail";
 import StudentEdit from "../Student/StudentEdit";
 import StudentNew from "../Student/StudentNew";
 
-
 export default () => (
   <div className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-2">
     <Route exact path="/dashboard" component={Dashboard} />

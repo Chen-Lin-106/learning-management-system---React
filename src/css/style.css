@@ -148,6 +148,11 @@ body {
   border-top-right-radius: 0;
 }
 
+.badge {
+  text-align: center;
+  font-size: 30px;
+}
+
 /*
  * Media Query
  */

@@ -8,7 +8,8 @@ export default class Courses extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      courses: []
+      courses: [],
+      l: {}
     };
   }
 
@@ -17,6 +18,8 @@ export default class Courses extends Component {
       .get(`http://lmsdemomar.azurewebsites.net/api/course`)
       .then(response => {
         const courses = response.data;
+        const l = courses.map(a => a.lenghth);
+        console.log(l);
         this.setState({ courses });
       })
       .catch(e => {
