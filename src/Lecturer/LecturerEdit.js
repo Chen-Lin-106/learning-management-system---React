@@ -16,7 +16,7 @@ export default class CourseEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
     const { lecturers } = this.state;
     if ("NEW" === id) {
@@ -43,7 +43,7 @@ export default class CourseEdit extends Component {
     e.preventDefault();
     const { lecturers } = this.state;
     const { id } = this.props.match.params;
-    const { match: { params }, history } = this.props;
+    const { history } = this.props;
     if ("NEW" === id) {
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/lecturer`, lecturers)

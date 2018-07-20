@@ -27,7 +27,7 @@ export default class CourseDetail extends Component {
   handleDelete = event => {
     const { id } = this.props.match.params;
     const {
-      match: { params },
+      
       history
     } = this.props;
     axios

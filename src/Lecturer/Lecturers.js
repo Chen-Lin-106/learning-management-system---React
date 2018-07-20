@@ -26,7 +26,6 @@ export default class Lecturers extends Component {
 
   render() {
     const { lecturers } = this.state;
-    console.log(lecturers);
     return (
       <div className="main">
         <LecturerHeader />

@@ -16,7 +16,7 @@ export default class CourseEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
     const { courses } = this.state;
     if ("NEW" === id) {
@@ -44,7 +44,6 @@ export default class CourseEdit extends Component {
     const { courses } = this.state;
     const { id } = this.props.match.params;
     const {
-      match: { params },
       history
     } = this.props;
     if ("NEW" === id) {
@@ -77,7 +76,7 @@ export default class CourseEdit extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="" />
+
           </li>
         </ul>
 

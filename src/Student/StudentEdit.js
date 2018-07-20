@@ -16,7 +16,7 @@ export default class StudentEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.match.params;
     const { students } = this.state;
     if ("NEW" === id) {
@@ -43,10 +43,7 @@ export default class StudentEdit extends Component {
     e.preventDefault();
     const { students } = this.state;
     const { id } = this.props.match.params;
-    const {
-      match: { params },
-      history
-    } = this.props;
+    const { history } = this.props;
     if ("NEW" === id) {
       axios
         .post(`http://lmsdemomar.azurewebsites.net/api/student`, students)
@@ -77,7 +74,7 @@ export default class StudentEdit extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link disabled" href="" />
+
           </li>
         </ul>
 

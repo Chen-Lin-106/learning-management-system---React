@@ -49,58 +49,58 @@ export default class Dashboard extends Component {
     return (
       <div>
         <DashboardHeader />
-        <section class="jumbotron text-center">
-          <div class="container">
-            <h1 class="jumbotron-heading">Learning Managnment System - LMS</h1>
-            <p class="lead text-muted">
+        <section className="jumbotron text-center">
+          <div className="container">
+            <h1 className="jumbotron-heading">Learning Managnment System - LMS</h1>
+            <p className="lead text-muted">
               LMS is a system focus on manage for Course,
               Student, Lecturer
             </p>
           </div>
         </section>
 
-        <div class="album py-5 bg-light">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+        <div className="album py-5 bg-light">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+                <div className="card mb-4 box-shadow">
                   <img
-                    class="card-img-top"
+                    className="card-img-top"
                     src="https://i.pinimg.com/originals/a2/21/8c/a2218ca943271618502c1c7b58f45ff7.jpg"
-                    alt="Card image cap"
+                    alt="Card cap"
                   />
-                  <div class="card-body">
-                    <span class="badge badge-secondary badge-pill">
+                <div className="card-body">
+                    <span className="badge badge-secondary badge-pill">
                       {courses.coursenumber}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+              <div className="col-md-4">
+                <div className="card mb-4 box-shadow">
                   <img
-                    class="card-img-top"
+                    className="card-img-top"
                     src="https://easykey.uk/images/vgift/barry-avatar-400.png"
-                    alt="Card image cap"
+                    alt="Card cap"
                   />
-                  <div class="card-body">
-                    <span class="badge badge-secondary badge-pill">
+                <div className="card-body">
+                    <span className="badge badge-secondary badge-pill">
                       {students.studentnumber}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+              <div className="col-md-4">
+                <div className="card mb-4 box-shadow">
                   <img
-                    class="card-img-top"
+                    className="card-img-top"
                     src="http://www.hexatar.com/gallery/png/151204_094136_m35fd66e783.png"
-                    alt="Card image cap"
+                    alt="Card cap"
                   />
-                  <div class="card-body">
-                    <span class="badge badge-secondary badge-pill">
+                <div className="card-body">
+                    <span className="badge badge-secondary badge-pill">
                       {lecturers.lecturernumber}
                     </span>
                   </div>

@@ -18,8 +18,6 @@ export default class Courses extends Component {
       .get(`http://lmsdemomar.azurewebsites.net/api/course`)
       .then(response => {
         const courses = response.data;
-        const l = courses.map(a => a.lenghth);
-        console.log(l);
         this.setState({ courses });
       })
       .catch(e => {
@@ -53,6 +51,7 @@ export default class Courses extends Component {
                   alt="Card"
                 />
               </div>
+
             </div>
           ))}
         </div>

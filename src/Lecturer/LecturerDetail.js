@@ -10,7 +10,8 @@ export default class LecturerDetail extends Component {
 
     this.state = {
       lecturers: {},
-      teaching: {}
+      courses: [],
+      value: {}
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,9 +29,18 @@ export default class LecturerDetail extends Component {
       });
   }
 
-  handleDelete = event => {
+  componentDidMount() {
+    axios
+      .get(`http://lmsdemomar.azurewebsites.net/api/course`)
+      .then(response => {
+        const courses = response.data;
+        this.setState({ courses });
+      });
+  }
+
+  handleDelete(e) {
     const { id } = this.props.match.params;
-    const { match: { params }, history } = this.props;
+    const { history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/lecturer/${id}`)
       .then(() => {
@@ -39,21 +49,20 @@ export default class LecturerDetail extends Component {
     swal("Deleted", "Item has been deleted", "success");
   };
 
-  handleInputChange = e => {
-    const { name, value } = e.target;
-    const teaching = { ...this.state.teaching };
-    teaching[name] = value;
-    this.setState({ teaching });
-    console.log(teaching);
+  handleInputChange(e) {
+    e.preventDefault();
+    this.setState({value: e.target.value});
   };
 
   deletePick(e) {
     e.preventDefault();
-    const { id } = this.props.match.params;
-    const { teaching } = this.state;
-    const { match: { params }, history } = this.props;
+    const {lecturers } = this.state;
+    const { history } = this.props;
+    const {value } = this.state;
+    console.log(value);
+    console.log(lecturers.Id);
     axios
-      .delete(`http://lmsdemomar.azurewebsites.net/api/teaching`,{data:teaching})
+      .delete(`http://lmsdemomar.azurewebsites.net/api/teaching`, {data:{lecturerId:value, courseId:lecturers.Id}})
       .then(() => {
       history.push('/lecturers');
       });
@@ -62,10 +71,11 @@ export default class LecturerDetail extends Component {
 
     handlePick(e) {
       e.preventDefault();
-      const { teaching } = this.state;
-      const { match: { params }, history } = this.props;
+      const {lecturers } = this.state;
+      const { history } = this.props;
+      const {value } = this.state;
       axios
-        .post(`http://lmsdemomar.azurewebsites.net/api/teaching`, teaching)
+        .post(`http://lmsdemomar.azurewebsites.net/api/teaching`, {lecturerId:value, courseId:lecturers.Id})
         .then(() => {
         history.push('/lecturers');
         });
@@ -74,7 +84,7 @@ export default class LecturerDetail extends Component {
 
   render() {
     const { lecturers } = this.state;
-    const { teaching } = this.state;
+    const { courses } = this.state;
     return (
       <div className="main">
         <LecturerHeader />
@@ -130,26 +140,23 @@ export default class LecturerDetail extends Component {
               </div>
             </div>
             <div className="col-md-3">
-              <input
-                className="form-control"
-                value={teaching.lecturerId}
-                name="lecturerId"
-                placeholder="Course ID"
-                onChange={this.handleInputChange}
-              />
-              <input
-                  className="form-control"
-                  value={teaching.courseId}
-                  name="courseId"
-                  placeholder="Lecturer ID"
-                  onChange={this.handleInputChange}
-                />
+              <form>
+                   <label>
+               Choose course:
+               <select value={this.state.value} onChange={this.handleInputChange}>
+                 <option>Course List</option>
+                 { courses.map(course => (
+                     <option key={course.Id} value={course.Id}>#{course.Id} - {course.Name}</option>
+                 ))}
+               </select>
+             </label>
+             </form>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.handlePick}
               >
-                Choose Course
+                Pick Course
               </button>
               <button
                 type="button"

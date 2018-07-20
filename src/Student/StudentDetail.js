@@ -10,7 +10,8 @@ export default class StudentDetail extends Component {
 
     this.state = {
       students: {},
-      enrolment: {}
+      courses: [],
+      value: {}
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,9 +29,18 @@ export default class StudentDetail extends Component {
       });
   }
 
-  handleDelete = event => {
+  componentDidMount() {
+    axios
+      .get(`http://lmsdemomar.azurewebsites.net/api/course`)
+      .then(response => {
+        const courses = response.data;
+        this.setState({ courses });
+      });
+  }
+
+  handleDelete(e) {
     const { id } = this.props.match.params;
-    const { match: { params }, history } = this.props;
+    const { history } = this.props;
     axios
       .delete(`http://lmsdemomar.azurewebsites.net/api/student/${id}`)
       .then(() => {
@@ -39,20 +49,20 @@ export default class StudentDetail extends Component {
     swal("Deleted", "Item has been deleted", "success");
   };
 
-  handleInputChange = e => {
-    const { name, value } = e.target;
-    const enrolment = { ...this.state.enrolment };
-    enrolment[name] = value;
-    this.setState({ enrolment });
-    console.log(enrolment);
+  handleInputChange(e) {
+    const value = this.state;
+    e.preventDefault();
+    this.setState({value: e.target.value});
+    console.log(value);
   };
 
   handlePick(e) {
     e.preventDefault();
-    const { enrolment } = this.state;
-    const { match: { params }, history } = this.props;
+    const { history } = this.props;
+    const { students } = this.state;
+    const {value } = this.state;
     axios
-      .post(`http://lmsdemomar.azurewebsites.net/api/enrolment`, enrolment)
+      .post(`http://lmsdemomar.azurewebsites.net/api/enrolment`, {StudentID:students.Id, CourseID:value})
       .then(() => {
       history.push('/students');
       });
@@ -61,10 +71,11 @@ export default class StudentDetail extends Component {
 
   deletePick(e) {
     e.preventDefault();
-    const { enrolment } = this.state;
-    const { match: { params }, history } = this.props;
+    const { history } = this.props;
+    const { students } = this.state;
+    const {value } = this.state;
     axios
-      .delete(`http://lmsdemomar.azurewebsites.net/api/enrolment`, {data:enrolment})
+      .delete(`http://lmsdemomar.azurewebsites.net/api/enrolment`, {data:{StudentID:students.Id, CourseID:value}})
       .then(() => {
       history.push('/students');
       });
@@ -73,7 +84,7 @@ export default class StudentDetail extends Component {
 
   render() {
     const { students } = this.state;
-    const { enrolment } = this.state;
+    const { courses } = this.state;
     return (
       <div className="main">
         <StudentHeader />
@@ -89,7 +100,7 @@ export default class StudentDetail extends Component {
                 />
                 <div key={students.Id} className="card-body">
                   <h5 className="card-title">{students.Name}</h5>
-                  <h6 className="card-title">ID ---> {students.Id}</h6>
+                  <h6 className="card-title">Student ID: {students.Id}</h6>
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="btn-group">
                       <Link to={`/students/edit/${students.Id}`}>
@@ -125,34 +136,30 @@ export default class StudentDetail extends Component {
               </div>
             </div>
             <div className="col-md-2">
-              <input
-                className="form-control"
-                value={enrolment.StudentID}
-                name="StudentID"
-                placeholder={students.Id}
-                onChange={this.handleInputChange}
-                required
-              />
-              <input
-                className="form-control"
-                value={enrolment.CourseID}
-                name="CourseID"
-                placeholder="Course ID"
-                onChange={this.handleInputChange}
-              />
+         <form>
+              <label>
+          Choose course:
+          <select value={this.state.value} onChange={this.handleInputChange}>
+            <option>Course List</option>
+            { courses.map(course => (
+                <option key={course.Id} value={course.Id}>#{course.Id} - {course.Name}</option>
+            ))}
+          </select>
+        </label>
+        </form>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.handlePick}
               >
-                Choose Course
+                Enrol Course
               </button>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.deletePick}
               >
-                Delete Course
+                Drop Course
               </button>
 
             </div>
