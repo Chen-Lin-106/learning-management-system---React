@@ -53,8 +53,7 @@ export default class Dashboard extends Component {
           <div className="container">
             <h1 className="jumbotron-heading">Learning Managnment System - LMS</h1>
             <p className="lead text-muted">
-              LMS is a system focus on manage for Course,
-              Student, Lecturer
+              LMS is a application for the adminstration to plan, implement, and assess a specific school system 
             </p>
           </div>
         </section>

@@ -27,7 +27,7 @@ export default class CourseDetail extends Component {
   handleDelete = event => {
     const { id } = this.props.match.params;
     const {
-      
+
       history
     } = this.props;
     axios
@@ -55,10 +55,10 @@ export default class CourseDetail extends Component {
                 />
                 <div key={courses.Id} className="card-body">
                   <h5 className="card-title">{courses.Name}</h5>
-                  <h6 className="card-title">ID ---> #{courses.Id}</h6>
-                  <h6 className="card-title">Code ---> {courses.CourseCode}</h6>
+                  <h6 className="card-title">Course ID:  {courses.Id}</h6>
+                  <h6 className="card-title">Code:  {courses.CourseCode}</h6>
                   <p className="card-text">
-                    Introuction ---> {courses.Introduction}
+                    Introuction ---- {courses.Introduction}
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="btn-group">

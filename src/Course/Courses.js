@@ -42,7 +42,7 @@ export default class Courses extends Component {
                     </Link>
                   </h3>
                   <div className="mb-1 text-muted">
-                    COURSE ID -- #{course.Id}
+                    COURSE ID -- {course.Id}
                   </div>
                 </div>
                 <img

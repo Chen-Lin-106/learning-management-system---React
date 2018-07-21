@@ -1,25 +1,73 @@
 import React, { Component } from "react";
 
 export default class Login extends Component {
+  constructor() {
+    super();
+    this.state = { username: "", password: "" };
+    this.handleUserNameChange = this.handleUserNameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleUserNameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const { username, password } = this.state;
+    const { history } = this.props;
+
+    history.push("/dashboard");
+  }
+
   render() {
     return (
-      <div class="text-center">
-   <form class="form-signin">
-     <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-     <label for="inputEmail" class="sr-only">Email address</label>
-     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
-     <label for="inputPassword" class="sr-only">Password</label>
-     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
-     <div class="checkbox mb-3">
-       <label>
-         <input type="checkbox" value="remember-me" /> Remember me
-       </label>
-     </div>
-     <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
-     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-   </form>
- </div>
+      <form className="form-signin">
+        <div className="text-center mb-4">
+          <h1 className="h3 mb-3 font-weight-normal">Login to LMS</h1>
+        </div>
+
+        <div className="form-label-group">
+          <input
+            className="form-control"
+            placeholder="User Name"
+            value={this.state.username}
+            onChange={this.handleUserNameChange}
+            required
+            autofocus
+          />
+        </div>
+
+        <div className="form-label-group">
+          <input
+            className="form-control"
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+            required
+          />
+        </div>
+
+        <div className="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> Remember me
+          </label>
+        </div>
+        <button
+          className="btn btn-lg btn-dark btn-block"
+          type="submit"
+          onClick={this.handleSubmit}
+        >
+          Sign in
+        </button>
+      </form>
     );
   }
 }

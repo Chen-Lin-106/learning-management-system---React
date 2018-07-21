@@ -101,7 +101,7 @@ export default class LecturerDetail extends Component {
                 <div key={lecturers.Id} className="card-body">
                   <h5 className="card-title">{lecturers.Name}</h5>
                   <h6 className="card-title">
-                    ID ---> #{lecturers.Id}
+                    Lecturer ID: {lecturers.Id}
                   </h6>
 
 
@@ -139,7 +139,7 @@ export default class LecturerDetail extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <form>
                    <label>
                Choose course:
@@ -156,14 +156,14 @@ export default class LecturerDetail extends Component {
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.handlePick}
               >
-                Pick Course
+                Pick
               </button>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.deletePick}
               >
-                Delete Course
+                Drop
               </button>
             </div>
           </div>

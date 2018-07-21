@@ -50,10 +50,8 @@ export default class StudentDetail extends Component {
   };
 
   handleInputChange(e) {
-    const value = this.state;
     e.preventDefault();
     this.setState({value: e.target.value});
-    console.log(value);
   };
 
   handlePick(e) {
@@ -152,14 +150,14 @@ export default class StudentDetail extends Component {
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.handlePick}
               >
-                Enrol Course
+                Enrol
               </button>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"
                 onClick={this.deletePick}
               >
-                Drop Course
+                Drop
               </button>
 
             </div>
