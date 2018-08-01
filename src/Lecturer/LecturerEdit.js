@@ -9,7 +9,8 @@ export default class CourseEdit extends Component {
     super(props);
 
     this.state = {
-      lecturers: {}
+      lecturers: {},
+      error: {}
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,13 +46,14 @@ export default class CourseEdit extends Component {
     const { id } = this.props.match.params;
     const { history } = this.props;
     if ("NEW" === id) {
-      axios
-        .post(`http://lmsdemomar.azurewebsites.net/api/lecturer`, lecturers)
-        .then(() => {
-        history.push('/lecturers');
-        });
-      swal("Great!", "New Course has been added sucessfully", "success");
-      this.setState({ showbutton: false });
+      if (this.validateForm()) {
+        axios
+          .post(`http://lmsdemomar.azurewebsites.net/api/lecturer`, lecturers)
+          .then(() => {
+          history.push('/lecturers');
+          });
+        swal("Great!", "New Course has been added sucessfully", "success");
+      }
     } else {
       axios
         .put(
@@ -62,12 +64,25 @@ export default class CourseEdit extends Component {
         history.push('/lecturers');
         });
       swal("Great!", "It has been edited sucessfully!", "success");
-      this.setState({ showbutton: false });
     }
+  }
+
+  validateForm() {
+    const { lecturers } = this.state;
+    const { error } = this.state;
+
+    if (!lecturers['Name']) {
+      error['Name'] = "* Please Enter Name";
+    }
+
+    this.setState({
+        error: error
+      });
   }
 
   render() {
     const { lecturers } = this.state;
+    const { error } = this.state;
     return (
       <div className="main">
         <LecturerHeader />
@@ -95,9 +110,10 @@ export default class CourseEdit extends Component {
                   name="Name"
                   onChange={this.handleInputChange}
                 />
+              <div className="error">{error.Name}</div>
               </div>
 
-              <div className="btn-group">
+              <div className="btn-group col-md-12 mb-12">
 
                   <button
                     type="button"

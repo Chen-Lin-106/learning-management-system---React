@@ -9,7 +9,8 @@ export default class CourseEdit extends Component {
     super(props);
 
     this.state = {
-      courses: {}
+      courses: {},
+      error: {}
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -47,12 +48,14 @@ export default class CourseEdit extends Component {
       history
     } = this.props;
     if ("NEW" === id) {
-      axios
-        .post(`http://lmsdemomar.azurewebsites.net/api/course`, courses)
-        .then(() => {
-          history.push("/courses");
-        });
-      swal("Great!", "New Course has been added sucessfully", "success");
+      if (this.validateForm()) {
+        axios
+          .post(`http://lmsdemomar.azurewebsites.net/api/course`, courses)
+          .then(() => {
+            history.push("/courses");
+          });
+        swal("Great!", "New Course has been added sucessfully", "success");
+      }
     } else {
       axios
         .put(`http://lmsdemomar.azurewebsites.net/api/course/${id}`, courses)
@@ -63,8 +66,30 @@ export default class CourseEdit extends Component {
     }
   }
 
+  validateForm() {
+    const { courses } = this.state;
+    const { error } = this.state;
+
+    if (!courses['Name']) {
+      error['Name'] = "* Please Enter Name";
+    }
+
+    if (!courses['CourseCode']) {
+      error['CourseCode'] = '* Please Enter Code'
+    }
+
+    if (!courses['Introduction']) {
+      error['Introduction'] = '* Please Enter Introduction'
+    }
+
+    this.setState({
+        error: error
+      });
+  }
+
   render() {
     const { courses } = this.state;
+    const { error } = this.state;
     return (
       <div className="main">
         <CourseHeader />
@@ -91,6 +116,7 @@ export default class CourseEdit extends Component {
                   name="Name"
                   onChange={this.handleInputChange}
                 />
+                <div className="error">{error.Name}</div>
               </div>
 
               <div className="col-md-3 mb-3">
@@ -101,6 +127,7 @@ export default class CourseEdit extends Component {
                   name="CourseCode"
                   onChange={this.handleInputChange}
                 />
+              <div className="error">{error.CourseCode}</div>
               </div>
 
               <div className="col-md-12 mb-3">
@@ -111,6 +138,7 @@ export default class CourseEdit extends Component {
                   name="Introduction"
                   onChange={this.handleInputChange}
                 />
+              <div className="error">{error.Introduction}</div>
               </div>
 
               <div className="btn-group">

@@ -103,6 +103,12 @@ body {
   margin-left: 40px;
 }
 
+.error {
+  color: #cc0000;
+  margin-bottom: 12px;
+}
+
+
 /*
  *
  */

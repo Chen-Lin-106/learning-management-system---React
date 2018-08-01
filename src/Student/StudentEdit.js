@@ -9,7 +9,8 @@ export default class StudentEdit extends Component {
     super(props);
 
     this.state = {
-      students: {}
+      students: {},
+      error: {}
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,12 +46,14 @@ export default class StudentEdit extends Component {
     const { id } = this.props.match.params;
     const { history } = this.props;
     if ("NEW" === id) {
-      axios
-        .post(`http://lmsdemomar.azurewebsites.net/api/student`, students)
-        .then(() => {
-          history.push("/students");
-        });
-      swal("Great!", "New Course has been added sucessfully", "success");
+      if (this.validateForm()) {
+        axios
+          .post(`http://lmsdemomar.azurewebsites.net/api/student`, students)
+          .then(() => {
+            history.push("/students");
+          });
+        swal("Great!", "New Student has been added sucessfully", "success");
+      }
     } else {
       axios
         .put(`http://lmsdemomar.azurewebsites.net/api/student/${id}`, students)
@@ -61,8 +64,22 @@ export default class StudentEdit extends Component {
     }
   }
 
+  validateForm() {
+    const { students } = this.state;
+    const { error } = this.state;
+
+    if (!students['Name']) {
+      error['Name'] = "* Please Enter Name";
+    }
+
+    this.setState({
+        error: error
+      });
+  }
+
   render() {
     const { students } = this.state;
+    const { error } = this.state;
     return (
       <div className="main">
         <StudentHeader />
@@ -82,16 +99,19 @@ export default class StudentEdit extends Component {
           <form key={students.Id} className="needs-validation">
             <div className="row">
               <div className="col-md-3 mb-3">
-                <label>Name</label>
+                <label for="validationDefault01">Name</label>
                 <input
                   className="form-control"
+                  id="validationDefault01"
                   value={students.Name}
                   name="Name"
                   onChange={this.handleInputChange}
+                  required
                 />
+              <div className="error">{error.Name}</div>
               </div>
 
-              <div className="btn-group">
+              <div className="btn-group col-md-12 mb-12">
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-secondary"
