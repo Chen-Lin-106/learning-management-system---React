@@ -8,7 +8,7 @@ export default class Lecturers extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      lecturers: [],
+      lecturers: []
     };
   }
 
@@ -44,21 +44,17 @@ export default class Lecturers extends Component {
                     </Link>
                   </h3>
                   <div className="mb-1 text-muted">
-                    <Link
-                      className="text-dark"
-                      to={`/lecturers/${lecturer.Id}`}
-                    >
                     LECTURER ID -- {lecturer.Id}
-                  </Link>
                   </div>
-                  <p className="card-text mb-auto"></p>
+                  <p className="card-text mb-auto" />
                   <strong className="d-inline-block mb-2 text-primary">
-                      Teaching Course: {(lecturer.Teaching.map(a => a.course)).map(b => b.Name) + ""}
+                    Teaching Course:{" "}
+                    {lecturer.Teaching.map(a => a.course).map(b => b.Name) + ""}
                   </strong>
                   <strong className="d-inline-block mb-2 text-primary">
-                      Course ID: {(lecturer.Teaching.map(a => a.course)).map(b => b.Id) + ""}
+                    Course ID:{" "}
+                    {lecturer.Teaching.map(a => a.course).map(b => b.Id) + ""}
                   </strong>
-
                 </div>
                 <img
                   className="card-img-right flex-auto d-none d-md-block coursecard-img"
@@ -69,7 +65,6 @@ export default class Lecturers extends Component {
             </div>
           ))}
         </div>
-
 
         <div className="table-responsive">
           <table className="table table-striped table-sm">
@@ -84,10 +79,18 @@ export default class Lecturers extends Component {
             <tbody>
               {lecturers.map(lecturer => (
                 <tr key={lecturer.Id}>
-                  <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Id}</Link></td>
-                  <td><Link to={`/lecturers/${lecturer.Id}`}>{lecturer.Name}</Link></td>
-                  <td>{(lecturer.Teaching.map(a => a.course)).map(b => b.Name) + ""}</td>
-                  <td>{(lecturer.Teaching.map(a => a.course)).map(b => b.Id) + ""}</td>
+                  <td>{lecturer.Id}</td>
+                  <td>
+                    <Link to={`/lecturers/${lecturer.Id}`}>
+                      {lecturer.Name}
+                    </Link>
+                  </td>
+                  <td>
+                    {lecturer.Teaching.map(a => a.course).map(b => b.Name) + ""}
+                  </td>
+                  <td>
+                    {lecturer.Teaching.map(a => a.course).map(b => b.Id) + ""}
+                  </td>
                 </tr>
               ))}
             </tbody>

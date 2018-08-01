@@ -7,9 +7,7 @@ export default class Courses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
-      courses: [],
-      l: {}
+      courses: []
     };
   }
 
@@ -51,7 +49,6 @@ export default class Courses extends Component {
                   alt="Card"
                 />
               </div>
-
             </div>
           ))}
         </div>
