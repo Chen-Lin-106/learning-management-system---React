@@ -9,7 +9,7 @@ export default class StudentDetail extends Component {
     super(props);
 
     this.state = {
-      students: {},
+      students: [],
       courses: [],
       value: {}
     };

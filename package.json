@@ -2,7 +2,6 @@
   "name": "lms_ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rickychenlin.github.io/learning-management-system---React/",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
